@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Kernel fields</string>
+
+    <string name="title_error">Error</string>
+
+    <string name="title_field_no">Field No: %s</string>
+    <string name="title_farm_name">Farm name: %s</string>
+    <string name="title_corn_type">Corn type: %s</string>
+    <string name="title_field_no_descr">Field No Description: %s</string>
+    <string name="title_area">Field area: %,.6f</string>
+    <string name="search">Search…</string>
+    <string name="clear">Clear</string>
+    <string name="ok">OK</string>
+    <string name="fieldno_description_filter">FieldNo Description filter</string>
+    <string name="fieldno_filter">FieldNo filter</string>
+    <string name="corn_type_filter">Corn type filter</string>
+    <string name="cancel">Cancel</string>
+</resources>

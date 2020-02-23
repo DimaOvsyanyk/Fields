@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="field"
+            type="com.dimatest.kernelfields.database.entities.FieldDO" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_normal"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space_large">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fieldNoTxt"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                text="@{field.fieldNo}"
+                titleRes="@{@string/title_field_no}"
+                tools:text="@string/title_field_no"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/farmNameTxt"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/fieldNoTxt"
+                text="@{field.farmName}"
+                titleRes="@{@string/title_farm_name}"
+                tools:text="@string/title_farm_name"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cornTypeTxt"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/farmNameTxt"
+                text="@{field.cornType}"
+                titleRes="@{@string/title_corn_type}"
+                tools:text="@string/title_corn_type"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fieldNoDescriptionTxt"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/cornTypeTxt"
+                text="@{field.fieldNoDescr}"
+                titleRes="@{@string/title_field_no_descr}"
+                tools:text="@string/title_field_no_descr"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fieldAreaTxt"
+                style="@style/TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/fieldNoDescriptionTxt"
+                android:text="@{String.format(@string/title_area, field.area)}"
+                tools:text="@string/title_area"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

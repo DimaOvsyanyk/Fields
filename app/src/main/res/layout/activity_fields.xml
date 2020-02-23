@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dimatest.kernelfields.ui.fields.FieldsViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fields.FieldsActivity">
+
+        <LinearLayout
+            android:id="@+id/searchLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/space_small"
+            android:paddingBottom="@dimen/space_small">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/searchEt"
+                style="@style/TextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/space_normal"
+                android:layout_weight="1"
+                android:imeOptions="actionDone"
+                android:background="@drawable/bg_search"
+                android:hint="@string/search"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="@dimen/space_normal"
+                android:singleLine="true" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/space_small"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@color/colorPrimaryDark"
+                android:padding="@dimen/space_normal"
+                android:onClick="@{() -> viewModel.changeFilterVis()}"
+                android:src="@drawable/ic_filter_list" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fieldsRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/searchLayout"
+            android:paddingStart="@dimen/space_normal"
+            android:paddingEnd="@dimen/space_normal"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_field" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/searchLayout"
+            animateVisibility="@{viewModel.filtersVis}"
+            android:background="@color/filter_layout_back"
+            android:padding="@dimen/space_normal">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                style="@style/FilterField"
+                android:id="@+id/fieldNoDescrFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                filterList="@{viewModel.fieldNoDescrFilterList}"
+                android:hint="@string/fieldno_description_filter"
+                android:layout_marginTop="@dimen/space_small"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                style="@style/FilterField"
+                android:id="@+id/fieldNoFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                filterList="@{viewModel.fieldNoFilterList}"
+                android:hint="@string/fieldno_filter"
+                android:layout_marginTop="@dimen/space_normal"
+                app:layout_constraintTop_toBottomOf="@id/fieldNoDescrFilter" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                style="@style/FilterField"
+                android:id="@+id/cornTypeFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                filterList="@{viewModel.cornTypeFilterList}"
+                android:hint="@string/corn_type_filter"
+                android:layout_marginTop="@dimen/space_normal"
+                app:layout_constraintTop_toBottomOf="@id/fieldNoFilter" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/filterClearBtn"
+                style="@style/FilterButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_large"
+                android:layout_marginTop="@dimen/space_normal"
+                android:layout_marginEnd="@dimen/space_normal"
+                android:text="@string/clear"
+                app:layout_constraintEnd_toStartOf="@id/filterOkBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cornTypeFilter" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/filterOkBtn"
+                style="@style/FilterButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_normal"
+                android:layout_marginTop="@dimen/space_normal"
+                android:layout_marginEnd="@dimen/space_large"
+                android:text="@string/ok"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/filterClearBtn"
+                app:layout_constraintTop_toBottomOf="@id/cornTypeFilter" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+</layout>

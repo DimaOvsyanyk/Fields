@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="TextView">
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:textColor">@color/text_color_default</item>
+    </style>
+
+
+    <style name="FullscreenDialog" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="FilterButton">
+        <item name="android:background">@drawable/bg_filter_btns</item>
+    </style>
+
+    <style name="FilterField">
+        <item name="android:textSize">@dimen/text_size_default</item>
+        <item name="android:textColor">@color/text_color_default</item>
+        <item name="android:background">@drawable/bg_filter</item>
+        <item name="android:focusable">false</item>
+        <item name="android:inputType">none</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:clickable">true</item>
+        <item name="android:padding">@dimen/space_normal</item>
+    </style>
+
+</resources>

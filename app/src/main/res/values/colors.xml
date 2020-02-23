@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="dialog_multichoice_back">#80000000</color>
+    <color name="dialog_loader_back">#DDDDDD</color>
+    <color name="text_color_default">#000000</color>
+
+    <color name="polygon_fill_color">@android:color/holo_orange_light</color>
+    <color name="polygon_stroke_color">@android:color/holo_green_dark</color>
+
+    <color name="search_bg">@android:color/white</color>
+    <color name="search_stroke">@android:color/darker_gray</color>
+
+    <color name="filter_layout_back">#E7E7E7</color>
+    <color name="filter_spinner_back">@android:color/white</color>
+    <color name="filter_btns_back">@android:color/white</color>
+    <color name="filter_btns_stroke">@android:color/darker_gray</color>
+</resources>
