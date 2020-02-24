@@ -96,16 +96,20 @@ class FieldsActivity : BaseActivity<ActivityFieldsBinding>(), FieldsAdapter.Fiel
         }
         binding.filterClearBtn click {
             viewModel.clearFilters()
-            fieldsAdapter.performSearch(binding.searchEt.getTxt())
+            search()
         }
         binding.filterOkBtn click {
-            fieldsAdapter.apply {
-                fieldNoDescrFilterList = viewModel.fieldNoDescrFilterList.get() ?: emptyList()
-                fieldNoFilterList = viewModel.fieldNoFilterList.get() ?: emptyList()
-                cornTypeFilterList = viewModel.cornTypeFilterList.get() ?: emptyList()
-                performSearch(binding.searchEt.getTxt())
-            }
+            search()
             viewModel.changeFilterVis()
+        }
+    }
+
+    private fun search() {
+        fieldsAdapter.apply {
+            fieldNoDescrFilterList = viewModel.fieldNoDescrFilterList.get() ?: emptyList()
+            fieldNoFilterList = viewModel.fieldNoFilterList.get() ?: emptyList()
+            cornTypeFilterList = viewModel.cornTypeFilterList.get() ?: emptyList()
+            performSearch(binding.searchEt.getTxt())
         }
     }
 
