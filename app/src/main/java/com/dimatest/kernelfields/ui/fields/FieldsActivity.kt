@@ -94,7 +94,10 @@ class FieldsActivity : BaseActivity<ActivityFieldsBinding>(), FieldsAdapter.Fiel
                 }
             )
         }
-        binding.filterClearBtn click { viewModel.clearFilters() }
+        binding.filterClearBtn click {
+            viewModel.clearFilters()
+            fieldsAdapter.performSearch(binding.searchEt.getTxt())
+        }
         binding.filterOkBtn click {
             fieldsAdapter.apply {
                 fieldNoDescrFilterList = viewModel.fieldNoDescrFilterList.get() ?: emptyList()
