@@ -13,8 +13,11 @@
 .externalNativeBuild
 .cxx
 
+debug/
 androidTest/
 test/
+
+/app/secret.properties
 
 # Built application files
 *.apk
