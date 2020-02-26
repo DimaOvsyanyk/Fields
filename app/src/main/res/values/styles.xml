@@ -33,6 +33,7 @@
         <item name="android:cursorVisible">false</item>
         <item name="android:clickable">true</item>
         <item name="android:padding">@dimen/space_normal</item>
+        <item name="android:maxLines">3</item>
     </style>
 
 </resources>

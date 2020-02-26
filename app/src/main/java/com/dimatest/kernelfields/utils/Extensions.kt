@@ -2,6 +2,9 @@ package com.dimatest.kernelfields.utils
 
 import android.view.View
 import android.widget.EditText
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -22,3 +25,9 @@ fun Disposable.addToDisposable(compositeDisposable: CompositeDisposable) {
 }
 
 fun EditText.getTxt() = this.text.toString().trim()
+
+fun <T> LiveData<T>.observeNotNull(owner: LifecycleOwner, observer: (data: T) -> Unit) {
+    if (this.hasActiveObservers())
+        this.removeObservers(owner)
+    this.observe(owner, Observer { it?.let { observer(it) } })
+}

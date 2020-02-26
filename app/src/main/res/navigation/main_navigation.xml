@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
+    app:startDestination="@id/fieldsFragment">
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.dimatest.kernelfields.ui.map.MapsFragment"
+        android:label="MapsFragment" >
+        <argument
+            android:name="field"
+            app:argType="com.dimatest.kernelfields.database.entities.FieldDO" />
+    </fragment>
+    <fragment
+        android:id="@+id/fieldsFragment"
+        android:name="com.dimatest.kernelfields.ui.fields.FieldsFragment"
+        android:label="FieldsFragment" >
+        <action
+            android:id="@+id/action_fieldsFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+</navigation>

@@ -1,25 +1,25 @@
 package com.dimatest.kernelfields.ui.fields
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dimatest.kernelfields.ui.map.MapsActivity
 import com.dimatest.kernelfields.R
-import com.dimatest.kernelfields.common.BaseActivity
+import com.dimatest.kernelfields.common.BaseFragment
 import com.dimatest.kernelfields.database.entities.FieldDO
-import com.dimatest.kernelfields.databinding.ActivityFieldsBinding
+import com.dimatest.kernelfields.databinding.FragmentFieldsBinding
 import com.dimatest.kernelfields.dialogs.multiChoiceDialog.MultiChoiceDialog
 import com.dimatest.kernelfields.utils.click
 import com.dimatest.kernelfields.utils.getTxt
+import com.dimatest.kernelfields.utils.observeNotNull
+import kotlinx.android.synthetic.main.fragment_fields.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FieldsActivity : BaseActivity<ActivityFieldsBinding>(), FieldsAdapter.FieldSelected {
+class FieldsFragment : BaseFragment<FieldsViewModel, FragmentFieldsBinding>(), FieldsAdapter.FieldSelected {
 
-    override fun getLayoutRes() = R.layout.activity_fields
+    override fun getLayoutRes() = R.layout.fragment_fields
 
-    private val viewModel: FieldsViewModel by viewModel()
+    override val viewModel: FieldsViewModel by viewModel()
 
     private val fieldsAdapter: FieldsAdapter by lazy {
         FieldsAdapter(this)
@@ -29,38 +29,34 @@ class FieldsActivity : BaseActivity<ActivityFieldsBinding>(), FieldsAdapter.Fiel
         MultiChoiceDialog()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding.viewModel = viewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupList()
         observeModel()
         setupListeners()
     }
 
     private fun setupList() {
-        binding.fieldsRv.apply {
-            layoutManager = LinearLayoutManager(this@FieldsActivity)
+        fieldsRv.apply {
+            layoutManager = LinearLayoutManager(requireContext())
             adapter = fieldsAdapter
         }
     }
 
     private fun observeModel() {
-        viewModel.fieldsList.observe(this, Observer {
+        viewModel.fieldsList.observeNotNull(viewLifecycleOwner) {
             fieldsAdapter.setData(it)
             viewModel.saveFilterLists(it)
-        })
-        viewModel.loading.observe(this, Observer {
-            showLoader(it)
-        })
+        }
     }
 
     private fun setupListeners() {
-        binding.searchEt.doAfterTextChanged {
-            fieldsAdapter.performSearch(binding.searchEt.getTxt())
+        searchEt.doAfterTextChanged {
+            fieldsAdapter.performSearch(searchEt.getTxt())
         }
-        binding.fieldNoDescrFilter click {
+        fieldNoDescrFilter click {
             multiChoiceDialog.show(
-                supportFragmentManager,
+                childFragmentManager,
                 viewModel.fullFieldNoDescrFilterList,
                 viewModel.fieldNoDescrFilterList.get() ?: emptyList(),
                 object : MultiChoiceDialog.FilterSelectedListener {
@@ -70,9 +66,9 @@ class FieldsActivity : BaseActivity<ActivityFieldsBinding>(), FieldsAdapter.Fiel
                 }
             )
         }
-        binding.fieldNoFilter click {
+        fieldNoFilter click {
             multiChoiceDialog.show(
-                supportFragmentManager,
+                childFragmentManager,
                 viewModel.fullFieldNoFilterList,
                 viewModel.fieldNoFilterList.get() ?: emptyList(),
                 object : MultiChoiceDialog.FilterSelectedListener {
@@ -82,9 +78,9 @@ class FieldsActivity : BaseActivity<ActivityFieldsBinding>(), FieldsAdapter.Fiel
                 }
             )
         }
-        binding.cornTypeFilter click {
+        cornTypeFilter click {
             multiChoiceDialog.show(
-                supportFragmentManager,
+                childFragmentManager,
                 viewModel.fullCornTypeFilterList,
                 viewModel.cornTypeFilterList.get() ?: emptyList(),
                 object : MultiChoiceDialog.FilterSelectedListener {
@@ -94,11 +90,11 @@ class FieldsActivity : BaseActivity<ActivityFieldsBinding>(), FieldsAdapter.Fiel
                 }
             )
         }
-        binding.filterClearBtn click {
+        filterClearBtn click {
             viewModel.clearFilters()
             search()
         }
-        binding.filterOkBtn click {
+        filterOkBtn click {
             search()
             viewModel.changeFilterVis()
         }
@@ -109,18 +105,11 @@ class FieldsActivity : BaseActivity<ActivityFieldsBinding>(), FieldsAdapter.Fiel
             fieldNoDescrFilterList = viewModel.fieldNoDescrFilterList.get() ?: emptyList()
             fieldNoFilterList = viewModel.fieldNoFilterList.get() ?: emptyList()
             cornTypeFilterList = viewModel.cornTypeFilterList.get() ?: emptyList()
-            performSearch(binding.searchEt.getTxt())
+            performSearch(searchEt.getTxt())
         }
     }
 
     override fun selectField(field: FieldDO) {
-        val intent = Intent(this, MapsActivity::class.java).apply {
-            putExtra(FIELD_EXTRA_KEY, field)
-        }
-        startActivity(intent)
-    }
-
-    companion object {
-        const val FIELD_EXTRA_KEY = "field"
+        navigate(FieldsFragmentDirections.actionFieldsFragmentToMapsFragment(field))
     }
 }
