@@ -13,6 +13,9 @@
 .externalNativeBuild
 .cxx
 
+androidTest/
+test/
+
 # Built application files
 *.apk
 *.aar
